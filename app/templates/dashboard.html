@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Registration System</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/style.css')}}" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="dashboard" aria-labelledby="dashboard-title">
+        <header class="dashboard-header">
+          <div>
+            <p class="brand">Registration System</p>
+            <h1 id="dashboard-title">Dashboard</h1>
+          </div>
+          <a class="logout" href="login.html">Sign out</a>
+        </header>
+        <article class="welcome">
+          <h2>You are signed in</h2>
+          <p class="subtitle">
+            This is your account overview. More features can be added here as
+            the system grows.
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
