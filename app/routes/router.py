@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from app.config.database import insert_user, login_attempt
 
 from werkzeug.security import generate_password_hash
@@ -8,14 +8,15 @@ router = Blueprint("router", __name__)
 
 @router.route("/", methods=["GET", "POST"])
 def login():
-
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
         resultado = login_attempt(email, password)
 
         if resultado:
+            session['email'] = request.form['email']
             return redirect("/dashboard")
+        
 
     return render_template("login.html")
 
@@ -38,4 +39,14 @@ def register():
 
 @router.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    if 'email' in session:
+        return render_template("dashboard.html")
+    else:
+       return redirect("/")
+
+
+@router.route('/logout')
+def logout():
+    session.pop('email', None)
+    return redirect("/")
+
