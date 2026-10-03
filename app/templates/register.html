@@ -6,7 +6,7 @@
     <title>Create account</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='/style.css') }}"
+      href="{{ url_for('static', filename='css/style.css') }}"
     />
   </head>
   <body>
@@ -18,34 +18,57 @@
 
         <p class="subtitle">Fill in your details to get started.</p>
 
-        <form action="/register" method="POST">
-          <label for="name">Name</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            autocomplete="name"
-            required
-          />
+        <form action="/register" method="POST" data-validate>
+          <div class="field-group">
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              minlength="2"
+            />
+            <small
+              class="field-error"
+              id="name-error"
+              aria-live="polite"
+            ></small>
+          </div>
 
-          <label for="email">E-mail</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-          />
+          <div class="field-group">
+            <label for="email">E-mail</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+            />
+            <small
+              class="field-error"
+              id="email-error"
+              aria-live="polite"
+            ></small>
+          </div>
 
-          <label for="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autocomplete="new-password"
-            minlength="8"
-            required
-          />
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              minlength="8"
+              required
+            />
+            <small
+              class="field-error"
+              id="password-error"
+              aria-live="polite"
+            ></small>
+          </div>
 
           <button type="submit">Create account</button>
         </form>
@@ -55,5 +78,7 @@
         </p>
       </section>
     </main>
+
+    <script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
   </body>
 </html>

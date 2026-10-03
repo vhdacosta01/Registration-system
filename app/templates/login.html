@@ -6,7 +6,7 @@
     <title>Sign in</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='/style.css')}}"
+      href="{{ url_for('static', filename='css/style.css') }}"
     />
   </head>
   <body>
@@ -15,32 +15,51 @@
         <p class="brand">Registration System</p>
         <h1 id="login-title">Welcome back</h1>
         <p class="subtitle">Sign in to continue to your account.</p>
-        <form action="/" method="POST">
-          
-          <label for="email">E-mail</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-          />
 
-          <label for="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autocomplete="current-password"
-            required
-          />
+        <form action="/" method="POST" data-validate>
+          <div class="field-group">
+            <label for="email">E-mail</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+            />
+            <small
+              class="field-error"
+              id="email-error"
+              aria-live="polite"
+            ></small>
+          </div>
+
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              minlength="8"
+            />
+            <small
+              class="field-error"
+              id="password-error"
+              aria-live="polite"
+            ></small>
+          </div>
 
           <button type="submit">Sign in</button>
         </form>
+
         <p class="switch-page">
           Don't have an account? <a href="/register">Create one</a>
         </p>
       </section>
     </main>
+
+    <script src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
   </body>
 </html>
